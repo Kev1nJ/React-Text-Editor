@@ -1,6 +1,7 @@
 // Import methods to save and get data from the indexedDB database in './database.js'
 import { getDb, putDb } from './database';
 import { header } from './header';
+import { openDB } from 'idb';
 
 export default class {
   constructor() {
@@ -40,3 +41,9 @@ export default class {
     });
   }
 }
+
+const dbPromise = idb.openDB('text-editor-db', 1, {
+  upgrade(db) {
+    db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
+  },
+});

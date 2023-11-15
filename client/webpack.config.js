@@ -17,45 +17,49 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        favicon: './src/favicon.ico',
+        title: 'J.A.T.E.',
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: './src-sw.js',
       }),
       new WebpackPwaManifest({
-        name: 'Your App Name',
-        short_name: 'ShortName',
-        description: 'Your app description',
+        name: 'Just Another Text Editor',
+        short_name: 'J.A.T.E.',
+        description: 'Takes notes using JavaScript',
         start_url: '/',
+        publicPath: '/',
         display: 'standalone',
         background_color: '#ffffff',
         theme_color: '#000000',
         icons: [
           {
-            src: path.resolve('/client/favicon.ico'),
-            sizes: [192, 512],
-            destination: path.join('icons'),
+            src: path.resolve(__dirname, 'src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
           },
         ],
-      }),
-      new InjectManifest({
-        swSrc: './src/sw.js',
-        swDest: 'sw.js',
       }),
     ],
 
     module: {
+      // CSS loaders
       rules: [
         {
-          test: /\.js$/,
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
           exclude: /node_modules/,
+          // We use babel-loader to transpile ES6.
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
-        },
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
         },
       ],
     },

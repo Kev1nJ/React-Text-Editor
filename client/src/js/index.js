@@ -1,7 +1,25 @@
 import { Workbox } from 'workbox-window';
+import { getDb, putDb } from './database';
 import Editor from './editor';
 import './database';
 import '../css/style.css';
+
+
+getDb().then((data) => {
+  console.log('Data from IndexedDB:', data);
+});
+
+const newData = 'Some new content';
+putDb(newData).then(() => {
+  console.log('Data added to IndexedDB');
+});
+
+const dbPromise = idb.openDB('text-editor-db', 1, {
+  upgrade(db) {
+    db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
+  },
+});
+
 
 const main = document.querySelector('#main');
 main.innerHTML = '';

@@ -3,10 +3,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack --mode production",
-    "start": "concurrently \"npm run server\" \"npm run webpack\"",
-    "webpack": "webpack --watch",
-    "server": "node server/index.js",
-    "install": "npm install"
+    "start": "webpack --watchAll"
   
   },
   "author": "2U",
