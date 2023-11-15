@@ -13,7 +13,7 @@ const initdb = async () =>
   });
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
-const dbPromise = idb.openDB('text-editor-db', 1, {
+const dbPromise = openDB('text-editor-db', 1, {
   upgrade(db) {
     db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
   },

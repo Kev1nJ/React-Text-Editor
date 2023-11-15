@@ -1,3 +1,4 @@
+import { openDB } from 'idb'
 import { Workbox } from 'workbox-window';
 import { getDb, putDb } from './database';
 import Editor from './editor';
@@ -14,7 +15,7 @@ putDb(newData).then(() => {
   console.log('Data added to IndexedDB');
 });
 
-const dbPromise = idb.openDB('text-editor-db', 1, {
+const dbPromise = openDB('text-editor-db', 1, {
   upgrade(db) {
     db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
   },

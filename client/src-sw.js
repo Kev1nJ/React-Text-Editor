@@ -1,5 +1,5 @@
 // Add this importScripts statement at the beginning
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/7.2.1/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js');
 
 // Continue with the rest of your service worker code
 const { warmStrategyCache } = require('workbox-recipes');

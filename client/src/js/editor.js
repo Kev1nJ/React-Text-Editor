@@ -42,7 +42,7 @@ export default class {
   }
 }
 
-const dbPromise = idb.openDB('text-editor-db', 1, {
+const dbPromise = openDB('text-editor-db', 1, {
   upgrade(db) {
     db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
   },
